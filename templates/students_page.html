@@ -1,0 +1,45 @@
+{% load static %}
+<html>
+<head>
+    <title>MERU</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+</head>
+<style>
+    body {
+        background-image: url("static/css/images/background.jpg");
+
+    }
+</style>
+<body>
+<div class="grid-container">
+    <header class="header">
+        <div class="brand">
+            <a  href="{% url 'profile'%}">MERU</a>
+        </div>
+        <div class="header-links">
+            {% for course in courses %}
+            <a href="{% url 'registration:unit_registration' slug=course.slug %}">
+                Register_units
+                </a>|
+            {% endfor %}
+            <a href="{% url 'registered_units'%}">View Attendance</a>|
+            <a href="{% url 'logout'%}">Logout</a>
+
+        </div>
+        </header>
+            </header>
+    <main class="main">
+        {% block content %}
+        {% endblock content %}
+    </main>
+    <footer class="footer">
+         <div class="text-center brand">
+           <span>
+               Copyright &copy; <script>document.write(new Date().getFullYear())</script> Jotra Programmers
+           </span>
+       </div>
+    </footer>
+</div>
+</body>
+</html>

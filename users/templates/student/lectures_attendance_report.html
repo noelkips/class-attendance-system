@@ -1,0 +1,117 @@
+{% extends 'students_page.html' %}
+
+{% block content %}
+<style>
+    .card-text{
+        color: rgb(255, 255, 255);
+        padding-left: 20px;
+    }
+    .card-text-btn{
+        font-size: 2.2rem;
+        padding: 0.5rem;
+        background-color: rgb(182, 211, 186);
+        box-shadow: 5px 10px 30px rgba(18, 156, 13, 0.2);
+        border-radius: 20px;
+        color: #ffffff;
+        cursor: pointer;
+        text-align: center;
+
+    }
+    .category-name-cap{
+        border-radius: 20px;
+        text-align: center;
+    }
+    .see-more-btn{
+        width: 190px;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: #07221d;
+        border-radius: 20px;
+        box-shadow: 15px 20px 40px rgba(172, 128, 9, 0.2);
+        font-size: 28px;
+        text-decoration: none;
+        margin-left: 40px;
+
+}
+</style>
+<div class="card-body " style="background-color:blue; font-size:30px; padding:20px; margin:20px;">
+      <p class="card-text">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead >
+              <tr>
+                  <th scope="col" colspan="2" ><h2  class="text-white">Unit Information</h2></th>
+
+              </tr>
+            </thead>
+            <tbody  class="alert alert-primary">
+                 <tr>
+                <td><h3>Unit</h3></td>
+                <td><h3>{{unit.unit_name}}</h3> </td>
+             </tr>
+                 <tr>
+                <td><h3>Lecturer</h3></td>
+                <td><h3>{{unit.lecturer.first_name}} {{unit.lecturer.last_name}}</h3> </td>
+             </tr>
+                   <tr>
+                <td><h3>Semester</h3></td>
+                <td><h3>Semester-{{unit.semester}}</h3> </td>
+
+                 <tr>
+                     <td><h3>Attendance</h3></td>
+                     <td style="background-color:maroon; color:white; font-size:30px; margin:15px;">{{total_attendance}}</td>
+                 </tr>
+                 <tr>
+                     <td colspan="2" ><h2 style="background-color:black; color:white; padding:15px; font-weight:bold;">{{exam_qualification}}</h2></td>
+                 </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </p>
+    </div>
+
+<div class="alert alert-success text-center " role="alert">
+    <h1>Below are the lectures you have attended </h1>
+</div>
+<div class="card-body " style="background-color:blue; font-size:30px; padding:20px; margin:20px;">
+      <p class="card-text">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead >
+              <tr>
+                  <th scope="col" ><h2  class="text-white">Lecture</h2></th>
+                <th scope="col" ><h2  class="text-white">Date</h2></th>
+              </tr>
+            </thead>
+            <tbody  class="alert alert-primary" style="font-size:24px;">
+                 {% for lecture in lectures %}
+                 <tr>
+                <td>{{lecture.lecture}}</td>
+                <td> {{lecture.date}}</td>
+
+             </tr>
+             {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </p>
+    </div>
+<div class="alert alert-success text-center " role="alert">
+    <h1>All lectures for this unit </h1>
+</div>
+<div class="alert" style="background-color:blue; color:white; font-size:30px; padding:20px; margin:20px;">
+<ol type="1">
+    {% for lecture in all_lectures %}
+    <li>
+       {{lecture}}
+    </li>
+    {% endfor %}
+</ol>
+
+</div>
+
+{% endblock %}

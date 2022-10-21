@@ -1,0 +1,19 @@
+
+.login-form{
+    border: 2px solid #666699;
+    background-color: rgb(25, 168, 44);
+    margin-top: 40px;
+}
+.signup-form{
+    border: 2px solid #666699;
+    margin-top: 10%;
+    margin-left: 20%;
+    text-align: center;
+    padding: 13px;
+}
+
+@media screen and (max-width: 480px) {
+    .login-form {
+        background-color: lightgreen;
+    }
+}

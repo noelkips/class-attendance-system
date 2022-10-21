@@ -1,0 +1,63 @@
+{% extends 'base.html'%}
+
+{%block content%}
+
+
+<div class="row">
+<div class="col-12">
+  <div class="card bg-light ms-4 me-4 mb-4">
+    <div class="card-header">
+      <i class=""> Registered students</i><br><hr>
+        <div class="bg-success header-links">
+            <a  class="alert-link " href="{% url 'user_new' %}">+ Add Student</a>
+        </div>
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Student Name</th>
+                <th scope="col">Reg Number</th>
+                <th scope="col">Course</th>
+                <th scope="col">year</th>
+                <th scope="col">semester</th>
+                <th scope="col">School</th>
+                <th scope="col" colspan="2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                 <tr>
+                    <td>{{user.first_name}} {{user.last_name}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.course}}</td>
+                    <td>{{user.year}}</td>
+                    <td>{{user.semester}}</td>
+                    <td>{{user.school}}</td>
+                     <td>
+                         <button class="btn btn-success">
+                            <a  class="text-white" href="{% url 'user_edit' slug=user.slug %}">Update</a>
+                        </button>
+                          <button class="btn btn-success">
+                           <a class="text-white" href="{% url 'password_reset' %}">Reset password</a></h3>
+                        </button>
+                         <button class="btn btn-danger">
+                            <a  class="text-white" href="{% url 'user_delete' slug=user.slug %}">Delete</a>
+                        </button>
+                     </td>
+
+                 </tr>
+             {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </p>
+    </div>
+</div>
+
+
+</div>
+</div>
+{%endblock%}

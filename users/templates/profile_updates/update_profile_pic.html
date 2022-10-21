@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="row justify-content-centre">
+    <div class="col-12">
+        <div class="card bg-light mb-3">
+            <div class="card-header">
+             Choose file on your computer to upload
+            </div>
+            <div class="card-body">
+                <form class="" action="{% url 'profile' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="">
+        <div class=""><br>
+            <input type="file" class="custom-file-input" id="inputGroupFile04"  name="image">
+            <label class="" for="inputGroupFile04">Choose file</label>
+        </div><hr>
+        <div class=""><br>
+            <button class="btn btn-primary" type="submit" name="profile_pic">  Upload</button>
+            <a class="btn bg-danger" href="{% url 'profile' %}">cancel</a>
+        </div>
+    </div>
+</form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

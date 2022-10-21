@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+       
+
+<ul class="row">
+    {% for unit in courses.units.all %}
+   <li class="col-auto " >
+
+            <div class ="card  bg-white mb-3 sm-3" style="width: 339px;">
+            <div class="card-body">
+                {% if unit.image %}
+                <img src="{{ unit.image.url }}" alt="course image">
+                {% else %}
+                <p></p>
+                {% endif %}
+                <h2 class="category-name-cap">{{unit.unit_name}}</h2><hr>
+                <h3 class="card-text btn ">{{unit.course}}</h3><hr>
+                <h3 class="card-text btn ">On Offer: {{unit.is_offered}}</h3><hr>
+            <button class="btn btn-indigo btn-rounded btn-md">
+                <a href="{% url 'meru_learning:lectures_list' slug=unit.slug course=courses.slug school=courses.school%}">
+                <h2>
+                    <span> View  Lectures</span>
+                </h2>
+            </a> 
+            </button>
+                 <button class="btn btn-indigo btn-rounded btn-md">
+                <a href="">
+                <h2>
+                    <span> View  Registered students</span>
+                </h2>
+            </a>
+            </button>
+
+            </div>
+        </div>
+    </li>
+
+    {% endfor %}
+</ul>
+{% endblock %}

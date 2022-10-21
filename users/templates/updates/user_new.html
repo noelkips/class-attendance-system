@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if success %}
+<div class="alert alert-success" role="alert">
+    The New Student Added Successfully.
+    <a href="{% url 'users_list' %}" class="alert-link">View Student</a>
+</div>
+{% else %}
+<div class="row justify-content-centre">
+    <div class="col-6">
+        <div class="card bg-light mb-3">
+            <div class="card-header">
+                <i class="fa-solid fa-address-card fa-lg"></i>Add  Student
+            </div>
+            <div class="card-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    <a href="{% url 'users_list' %}" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%}
+{% endblock content %}

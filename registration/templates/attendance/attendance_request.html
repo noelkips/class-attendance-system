@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{%block content%}
+
+<div class="row justify-content-centre">
+    <div class="col-12">
+        <div class="card bg-light mb-3">
+            <div class="card-header">
+           Select Unit
+            </div>
+            <div class="card-body">
+                <form action="{% url 'registration:attendance'%}" method="POST">
+                    {% csrf_token %}
+                     <label for="lecture" class="text-white">Lecture </label>
+                <div  class="form-control" id="lecture">
+                     <h3 class=""><input class="big-radio" type="file" name="lecture">{{ form.as_p}}
+                     </h3><br></div>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

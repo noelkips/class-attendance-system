@@ -1,0 +1,115 @@
+{% extends 'lecturer_panel.html'%}
+
+{%block content%}
+<style>
+    .user-image img{
+        border-radius: 50%;
+    }
+</style>
+
+    {% if user.profile_pic %}
+ <div class="user-image">
+        <img src="{{user.profile_pic.url}}" alt="profile pic" height="200px" width="200px"><br>
+    </div><p>
+
+
+    {% else %}
+<p>visit admin to add your profile pic</p>
+    {%endif%}
+
+<div class="row">
+<div class="col-12">
+  <div class="card bg-light ms-4 me-4 mb-4">
+    <div class="card-header">
+      <i class="fa-solid fa-list"></i> Personal Information
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <div class="table-responsive">
+          <table class="table table-hover">
+  <thead>
+   <tr>
+     <th scope="col">First Name</th>
+     <th scope="col">Last Name</th>
+     <th scope="col">Payroll Number</th>
+     <th scope="col">Email</th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+     <td>{{user.first_name}} </td>
+     <td>{{user.last_name}}</td>
+     <td>{{user.username}}</td>
+     <td>{{user.email}}</td>
+   </tr>
+  </tbody>
+</table>
+        </div>
+      </p>
+    </div>
+    </div>
+
+  </div>
+</div>
+<hr>
+<br>
+<div class="alert alert-success text-center " role="alert">
+    <h1>Your Current Teaching Subjects </h1>
+</div>
+<div class="row">
+<div class="col-12">
+  <div class="card bg-light ms-4 me-4 mb-4">
+    <div class="card-header">
+     All Units
+
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Unit</th>
+                <th scope="col" >Course</th>
+                <th scope="col">On Offer</th>
+                <th scope="col">Semester</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for unit in units %}
+             <tr>
+                <td>
+                    <h3>{{unit.unit_name}}</h3>
+                </td>
+                <td>{{unit.course}}</td>
+                <td>{{unit.is_offered}}</td>
+                <td>{{unit.semester}}</td>
+                <td>
+                      <a class="btn btn-primary float-right" href="{% url 'meru_learning:unit_student_registration'  course=unit.course.slug school=unit.course.school%}">
+            Register Student
+          </a>
+                        <a class="btn btn-primary" href="{% url 'lecturer_lectures' slug=unit.slug %}">
+                         View Lectures
+                        </a>
+                     <a class="btn btn-primary" href="{% url 'meru_learning:unit_student_list' slug=unit.slug course=unit.course.slug school=unit.course.school%}">
+                          Registered Students
+                        </a>
+                </td>
+
+
+             </tr>
+             {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </p>
+    </div>
+</div>
+
+</div>
+</div>
+
+{%endblock%}
+
+

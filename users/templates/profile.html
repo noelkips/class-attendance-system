@@ -1,0 +1,159 @@
+{% extends 'students_page.html'%}
+
+{%block content%}
+<style>
+    body{
+        background-color: blue;
+    }
+
+    .user-image img{
+        border-radius: 50%;
+    }
+    .card-body{
+        background-color: black;
+    }
+    .table tr ,td{
+        color: white;
+        font-weight: bold;
+        font-size: 24px;
+    }
+</style>
+{% if user.is_authenticated%}
+    {% if user.profile_pic %}
+ <div class="user-image">
+        <img src="{{user.profile_pic.url}}" alt="profile pic" height="200px" width="200px"><br>
+    </div>
+    {% else %}
+<p>visit admin to add your profile pic</p>
+    {%endif%}
+
+<div class="row">
+<div class="col-12">
+  <div class="card bg-light ms-4 me-4 mb-4">
+    <div class="card-header">
+      <i class="fa-solid fa-list"></i> Personal Information
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <div class="table-responsive">
+          <table class="table">
+  <thead>
+   <tr>
+     <th scope="col">First Name</th>
+     <th scope="col">Last Name</th>
+     <th scope="col">UnitRegistration Number</th>
+     <th scope="col">Email</th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+     <td>{{user.first_name}} </td>
+     <td>{{user.last_name}}</td>
+     <td>{{user.username}}</td>
+     <td>{{user.email}}</td>
+   </tr>
+  </tbody>
+</table>
+        </div>
+      </p>
+    </div>
+    </div>
+
+  </div>
+</div>
+<hr>
+<div class="row">
+<div class="col-12">
+  <div class="card bg-light ms-4 me-4 mb-4">
+    <div class="card-header">
+      <i class="fa-solid fa-list"></i> Academic Information
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <div class="table-responsive">
+         <table class="table">
+  <thead>
+    <tr>
+     <th scope="col">School</th>
+     <th scope="col">Course</th>
+     <th scope="col">Academic year</th>
+     <th scope="col">semester</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+     <td>{{user.school}}</td>
+     <td>{{user.course}}</td>
+     <td>{{user.year}}</td>
+     <td>{{user.semester}}</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+      </p>
+    </div>
+    </div>
+
+  </div>
+</div>
+<br>
+<div class="alert alert-success text-center " role="alert">
+    <h1>Your Current Registered Units </h1>
+</div>
+<div class="row">
+<div class="col-8">
+  <div class="card bg-light ms-4 me-4 mb-4">
+    <div class="card-header">
+       Registered Units
+        {% for course in courses %}
+            <a  class="text-right all-units btn bg-black text-white" href="{% url 'all_units' slug=course.slug%}">All units</a>
+            {% endfor %}
+
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <div class="table-responsive">
+         <table class="table">
+  <thead>
+    <tr>
+     <th scope="col">Unit</th>
+     <th scope="col">Academic year</th>
+     <th scope="col" colspan="2">semester</th>
+        <th>Actions</th>
+    </tr>
+  </thead>
+             {% for unit in registered_units %}
+              <tbody>
+                <tr>
+                 <td>{{unit.unit}}</td>
+                 <td>{{unit.year}}</td>
+                 <td>{{unit.semester}}</td>
+                    <td>
+                        <a class="btn bg-danger text-white" href="{% url 'registration:registration_delete' pk=unit.pk %}"> Delete</a>
+                    </td>
+                    <td>
+                        <a class="btn bg-white text-black"  href="{% url 'student_attendance_report' slug=unit.unit.slug %}"> View Attendance</a>
+                    </td>
+                </tr>
+              </tbody>
+             {% endfor%}
+</table>
+        </div>
+      </p>
+    </div>
+    </div>
+
+  </div>
+</div>
+
+
+{% else %}
+<div class="alert alert-success" role="alert">
+    You must Log in First to see Your Profile.
+    <a href="{% url 'login'%}" class="alert-link">Take Me to Login</a>
+</div>
+
+{% endif %}
+{%endblock%}
+
+

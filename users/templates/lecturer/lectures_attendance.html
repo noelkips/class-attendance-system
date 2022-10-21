@@ -1,0 +1,64 @@
+{% extends 'lecturer_panel.html' %}
+
+{% block content %}
+<style>
+    .card-text{
+        color: rgb(255, 255, 255);
+        padding-left: 20px;
+    }
+    .card-text-btn{
+        font-size: 2.2rem;
+        padding: 0.5rem;
+        background-color: rgb(182, 211, 186);
+        box-shadow: 5px 10px 30px rgba(18, 156, 13, 0.2);
+        border-radius: 20px;
+        color: #ffffff;
+        cursor: pointer;
+        text-align: center;
+
+    }
+    .category-name-cap{
+        border-radius: 20px;
+        text-align: center;
+    }
+    .see-more-btn{
+        width: 190px;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: #07221d;
+        border-radius: 20px;
+        box-shadow: 15px 20px 40px rgba(172, 128, 9, 0.2);
+        font-size: 28px;
+        text-decoration: none;
+        margin-left: 40px;
+
+}
+</style>
+<div class="alert alert-dark text-center " role="alert">
+    <h1>Choose the Lecture to take Attendance </h1>
+</div>
+
+<ul class="row">
+      {% for lecture in units.lectures.all %}
+       <li class="col-auto " >
+                <div class ="card  bg-white mb-3 sm-3" style="width: 339px;">
+                <div class="card-body">
+                    <h2 class="category-name-cap  "> {{lecture.lecture_name}}</h2><hr>
+                    <h3 class="card-text btn ">{{lecture.unit}}</h3><hr>
+                     <h3 class="card-text btn ">Lecturer: {{lecture.created_by}}</h3><hr>
+                     <button class="btn btn-indigo btn-rounded btn-md">
+                    <a href="{% url 'registration:attendance' slug=lecture.slug  %}">
+                    <h2>
+                        <span>Select</span>
+                    </h2>
+                    </a></button>
+
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock content %}

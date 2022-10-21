@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+{% if units_to_register %}
+<ul class="row">
+    <div class="alert alert-success" role="alert">
+        <h1> Available Units For UnitRegistration</h1>
+    </div>
+    {% for unit in units_to_register %}
+       <li class="col-auto " >
+
+                <div class ="card  bg-white mb-3 sm-3" style="width: 339px;">
+                <div class="card-body">
+                    {% if unit.image %}
+                     <img src="{{ unit.image.url }}" alt="course image" height="200px" width="100%">
+                    {% else %}
+                    <p></p>
+                    {% endif %}
+                    <h2 class="category-name-cap">{{unit.unit_name}}</h2><hr>
+                    <h3 class="card-text btn ">{{unit.course}}</h3><hr>
+                    <h3 class="card-text btn ">On Offer: {{unit.is_offered}}</h3><hr>
+                    <button class="btn btn-indigo btn-rounded btn-md">
+                    <a href="{% url 'registration:unit_registration_new'%}">
+                        <h2>
+                            <span>Register</span>
+                        </h2>
+                    </a>
+                </button>
+
+                </div>
+            </div>
+        </li>
+
+
+    {% endfor %}
+</ul><br>
+
+{% else %}
+    <div class="alert alert-success text-center " role="alert">
+    <h1>{{user.first_name}} There are currently no units for registration</h1><br>
+        <h1> This is either because your profile is not updated or you have already registered all available units</h1>
+    <a href="{% url 'registration:registered_units'%}" class="btn btn-primary alert-link">
+        <h1>
+            <span>
+                See Registered Units
+            </span>
+        </h1></a>
+    </div>
+    {% endif %}
+{% endblock %}
+
+

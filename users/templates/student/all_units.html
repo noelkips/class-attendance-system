@@ -1,0 +1,48 @@
+{% extends 'students_page.html' %}
+
+{% block content %}
+{% load static %}
+<div class="row">
+<div class="col-12">
+  <div class="card bg-light ms-4 me-4 mb-4">
+    <div class="card-header">
+     All Units
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Unit</th>
+                <th scope="col" >Course</th>
+                <th scope="col">On Offer</th>
+                <th scope="col">Semester</th>
+                  <th scope="col">Lecturer</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for unit in courses.units.all %}
+             <tr>
+                <td>
+                    <h3>{{unit.unit_name}}</h3>
+                </td>
+                <td>{{unit.course}}</td>
+                <td>{{unit.is_offered}}</td>
+                <td>{{unit.semester}}</td>
+                  <td>{{unit.lecturer}}</td>
+
+
+             </tr>
+             {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </p>
+    </div>
+</div>
+
+</div>
+</div>
+
+{% endblock %}

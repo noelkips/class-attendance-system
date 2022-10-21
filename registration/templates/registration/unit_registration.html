@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if success %}
+<script>alert("Unit Registered Successfully!");</script>
+{% else %}
+<div class="row justify-content-centre">
+    <div class="col-12">
+        <div class="card bg-success mb-3">
+            <div class="card-header">
+              Register Unit
+            </div>
+            <div class="card-body">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endif%}
+{% endblock content %}
