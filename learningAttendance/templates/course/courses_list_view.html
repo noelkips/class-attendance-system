@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ {% if user.is_superuser %}
+<div class="float-right">
+    <a href="{% url 'meru_learning:course_create' slug=schools.slug %}" class="btn btn-success" style="background-color:#00bcd4;">
+    <h2>
+        <span>+ New Course</span>
+    </h2>
+</a><hr>
+</div>
+{%else%}
+<p></p>
+
+{%endif%}
+{% if user.is_staff %}
+    <ul class="row">
+    {% for course in schools.courses.all %}
+   <li class="col-auto " >
+       <div class ="card  bg-white mb-3 sm-3" style="width: 339px;">
+           {% if course.image %}
+           <img src="{{ course.image.url }}" alt="Course image" height="auto" width="100%">
+           {% else %}
+           <p></p>
+           {% endif %}
+           <div class="card-body">
+               <h2 class="category-name-cap  ">{{course.course_name}}</h2><hr>
+               <a href="{% url 'meru_learning:course_detail' slug=schools.slug pk=course.pk %}" class="btn btn-primary" style="background-color:#00bcd4;">See More</a>
+               </a>
+               <a class="btn btn-primary" href="{% url 'meru_learning:units_list' slug=course.slug school=schools.slug %}">
+                Units
+                </a>
+                <a class="btn btn-primary" href="{% url 'meru_learning:students' slug=course.slug school=schools.slug %}">
+                Students
+                </a>
+            </div>
+        </div>
+    </li>
+
+    {% endfor %}
+</ul>
+{% else %}
+<div class="alert alert-success text-center " role="alert">
+    <h1>{{user.first_name}} You will be redirected to your profile Page </h1><br>
+    <h2><a href="{% url 'profile'%}" class="alert-link">Take Me to profile</a></h2>
+</div>
+{% endif %}
+{% endblock %}

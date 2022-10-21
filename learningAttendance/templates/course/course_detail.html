@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="float-right-image">
+ {% if course.image %}
+    <img class="" src="{{ course.image.url }}" alt="course image" height="350px" width="350px">
+    {% else %}
+    <p></p>
+    {% endif %}
+</div>
+<div class="row">
+        <div class="col-md-8 d-flex mb-5 justify-content-center">
+            <div class="card card-std text-center" style="width: 36rem; height: auto">
+                <div class="card-body text-center">
+                    <h4 class="card-title" style="color:#ff5722;">{{course.name}}</h4>
+                    <p class="card-text">{{course.description}}</p>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'meru_learning:units_list' slug=course.slug  school=course.school%}" class="btn btn-primary" style="background-color:#00bcd4;">
+                         <h2>
+                            <span>View Units</span>
+                        </h2>
+                    </a>
+                    {%else%}
+                    <p>Register or login to check or manage attendance</p>
+                    <a href="{% url 'login' %}" class="btn btn-std" style="background-color:#00bcd4;">Login</a>
+                    <a href="{% url 'signup' %}" class="btn btn-primary" style="background-color:#00bcd4;">Register</a>
+                    {%endif%}
+                </div>
+            </div>
+        </div><br>
+    </div><br>
+<div class="row">
+    <div class="col-md-8 d-flex mb-5 justify-content-center">
+            <div class="card card-std text-center" style="width: 36rem; height: auto">
+                <h4 class="card-title" style="color:#ff5722;">{{course.name}}</h4>
+                <div class="card-body text-center">
+                    {% if user.is_superuser %}
+                    <a href="{% url 'meru_learning:course_update' slug=course.slug pk=course.pk %}" class="btn btn-primary" style="background-color:#00bcd4;">
+                        <h2>
+                            <span>Update</span>
+                        </h2>
+                    </a>
+                    <a href="{% url 'meru_learning:course_delete' slug=course.slug pk=course.pk %}" class="btn btn-danger" style="background-color:#00bcd4;">
+                         <h2>
+                            <span>Delete</span>
+                        </h2>
+                    </a>
+                    {%else%}
+                    <p>You are not allowed to update or delete this course</p>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock %}

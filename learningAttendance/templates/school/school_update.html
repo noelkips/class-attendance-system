@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="row justify-content-centre">
+    <div class="col-12">
+        <div class="card bg-light mb-3">
+            <div class="card-header">
+              Update School
+            </div>
+            <div class="card-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form|crispy}}<br>
+                     <input class="btn btn-success course-name" type="submit" value="Update" />
+                    <a href="{% url 'meru_learning:school_detail' pk=school.pk %}" class="btn bg-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

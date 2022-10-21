@@ -1,0 +1,47 @@
+{% extends 'base.html'%}
+
+{%block content%}
+
+
+<div class="row">
+<div class="col-12">
+  <div class="card bg-light ms-4 me-4 mb-4">
+    <div class="card-header">
+      <i class="fa-solid fa-list"></i> Registered students
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Student Name</th>
+                <th scope="col">Reg Number</th>
+                <th scope="col">Course</th>
+                <th scope="col">year</th>
+                <th scope="col">semester</th>
+                <th scope="col">School</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for user in courses.users.all %}
+                 <tr>
+                    <td>{{user.first_name}} {{user.last_name}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.course}}</td>
+                    <td>{{user.year}}</td>
+                    <td>{{user.semester}}</td>
+                    <td>{{user.school}}</td>
+                 </tr>
+             {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </p>
+    </div>
+</div>
+
+ 
+</div>
+</div>
+{%endblock%}
