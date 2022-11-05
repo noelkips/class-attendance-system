@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+
+{% block content %}
+{%load static%}
+<section class="display-3" style="padding: 0;align-items: left;justify-content: left;flex-wrap: wrap;    align-content: left;display: flex;position: relative;height: 5rem;">
+    <a style="z-index:1" href="{% url 'login_request' %}"><button class="btn btn-black"><< Back </button></a>
+</section>
+  <section data-bs-version="5.1" class="form4 cid-tmi3Yq1lwF mbr-fullscreen" id="form4-4">
+
+
+
+
+
+    <div class="container-fluid">
+        <div class="row content-wrapper justify-content-center">
+            <div class="col-lg-3 offset-lg-1 mbr-form">
+                <form  method="POST" class="mbr-form form-with-styler" data-verified="">
+                    {% csrf_token %}
+                    <div class="row">
+
+                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+                            Oops...! some problem!
+                        </div>
+                    </div>
+                    <div class="dragArea row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h1 class="mbr-section-title mb-4 display-5"><strong>Staff Login</strong></h1>
+                        </div>
+                        <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="name">
+                            <input type="text" name="username" placeholder="Payroll Number" data-form-field="name" class="form-control" value="" id="name-form4-4">
+                        </div>
+                        <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="email">
+                            <input type="password" name="password" placeholder="Password" data-form-field="email" class="form-control" value="" id="email-form4-4">
+                        </div>
+                        <div class="col-12 col-md-auto mbr-section-btn"><button type="submit" class="btn btn-secondary display-4">login</button></div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-7 offset-lg-1 col-12">
+                <div class="image-wrapper">
+                    <img class="w-100" src="{% static 'css/images/logo.png' %}"alt="must logo">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

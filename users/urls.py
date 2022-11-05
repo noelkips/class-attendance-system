@@ -4,7 +4,9 @@ from learningAttendance.views import StudentListView
 
 
 urlpatterns = [
-    path('login/', views.user_login, name='login'),
+    path('', views.login_request, name='login_request'),
+    path('student_login/', views.student_login, name='student_login'),
+    path('staff_login/', views.staff_login, name='staff_login'),
     path('logout/', views.user_logout, name='logout'),
 
 

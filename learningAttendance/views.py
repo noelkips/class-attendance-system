@@ -88,10 +88,41 @@ class StudentListView(DetailView):
     template_name = "course/students.html"
 
 
+# Views fo Units
+# 1 list
 class UnitsListView(DetailView):
-    context_object_name = 'courses'
+    context_object_name = 'units'
     model = Course
-    template_name = "units_list_view.html"
+    template_name = "unit/units_list_view.html"
+
+
+# 2 detail
+class UnitDetailView(DetailView):
+    model = Unit
+    template_name = 'unit/unit_detail.html'
+
+
+# 3 new unit
+# def unit_create_view(request, slug):
+
+class UnitCreateView(CreateView):
+    model = Unit
+    template_name = 'unit/unit_create.html'
+    fields = ['unit_name', 'course', 'year', 'semester', 'image', 'is_offered', 'description', 'lecturer']
+
+
+# 4 update existing unit
+class UnitUpdateView(UpdateView):
+    model = Unit
+    template_name = 'unit/unit_update.html'
+    fields = ['unit_name', 'course', 'year', 'semester', 'image', 'is_offered', 'description', 'lecturer']
+
+
+# 5 Delete unit
+class UnitDeleteView(DeleteView):
+    model = Unit
+    template_name = 'unit/unit_delete.html'
+    success_url = reverse_lazy('meru_learning:schools_list')
 
 
 class LecturesListView(DetailView):

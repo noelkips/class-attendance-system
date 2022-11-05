@@ -86,9 +86,6 @@
                 <td>{{unit.is_offered}}</td>
                 <td>{{unit.semester}}</td>
                 <td>
-                      <a class="btn btn-primary float-right" href="{% url 'meru_learning:unit_student_registration'  course=unit.course.slug school=unit.course.school%}">
-            Register Student
-          </a>
                         <a class="btn btn-primary" href="{% url 'lecturer_lectures' slug=unit.slug %}">
                          View Lectures
                         </a>

@@ -25,7 +25,7 @@
            {% endif %}
            <div class="card-body">
                <h2 class="category-name-cap  ">{{course.course_name}}</h2><hr>
-               <a href="{% url 'meru_learning:course_detail' slug=schools.slug pk=course.pk %}" class="btn btn-primary" style="background-color:#00bcd4;">See More</a>
+               <a href="{% url 'meru_learning:course_detail' slug=schools.slug pk=course.pk %}" class="btn btn-secondary" style="background-color:#00bcd4;">See More</a>
                </a>
                <a class="btn btn-primary" href="{% url 'meru_learning:units_list' slug=course.slug school=schools.slug %}">
                 Units
@@ -33,6 +33,9 @@
                 <a class="btn btn-primary" href="{% url 'meru_learning:students' slug=course.slug school=schools.slug %}">
                 Students
                 </a>
+               <a href="{% url 'meru_learning:unit_create' slug=course.slug school=schools.slug %}" class="btn btn-green" style="background-color:#00bcd4;">
+                  + add Unit
+               </a>
             </div>
         </div>
     </li>

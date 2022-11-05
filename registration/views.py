@@ -113,7 +113,7 @@ class AttendanceRequest(CreateView):
 
 def class_attendance(request, slug):
     lecture = get_object_or_404(Lecture, slug=slug)
-    path = 'media/Images/profile_pictures'
+    path = 'media/images/profile_pictures'
     images = []
     students_names = []
     image_list = os.listdir(path)

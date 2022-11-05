@@ -1,0 +1,32 @@
+{% load static%}
+<html  >
+<head>
+  <meta charset="UTF-8">
+  <meta name="twitter:image:src" content="">
+  <meta property="og:image" content="">
+  <meta name="twitter:title" content="must">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="{% static 'index_styles/images/must.png'%}" type="image/x-icon">
+  <meta name="description" content="">
+
+
+  <title>must</title>
+  <link rel="stylesheet" href="{% static 'index_styles/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'index_styles/bootstrap/css/bootstrap-grid.min.css' %}">
+  <link rel="stylesheet" href="{% static 'index_styles/bootstrap/css/bootstrap-reboot.min.css' %}">
+  <link rel="stylesheet" href="{% static 'index_styles/theme/css/style.css' %}">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,700;1,400;1,700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,700;1,400;1,700&display=swap&display=swap"></noscript>
+  <link rel="preload" as="style" href="{% static 'index_styles/index/css/mbr-additional.css' %}"><link rel="stylesheet" href="{% static 'index_styles/index/css/mbr-additional.css' %}" type="text/css">
+
+
+
+
+</head>
+<body>
+
+ {% block content %}
+ {% endblock content %}
+
+</body>
+</html>

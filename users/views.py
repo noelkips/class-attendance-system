@@ -16,7 +16,11 @@ from learningAttendance.models import Course, Unit, Lecture
 from registration.models import Registration, Attendance
 
 
-def user_login(request):
+def login_request(request):
+    return render(request, "registration/login.html")
+
+
+def staff_login(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -32,14 +36,39 @@ def user_login(request):
                 return HttpResponseRedirect(reverse('lecturer_profile'))
             elif user.is_active:
                 login(request, user)
+                return HttpResponseRedirect(reverse('student_login'))
+                # return HttpResponse('Please Go back to Login and select Student Login')  # student_panel
+            else:
+                return HttpResponse("ACCOUNT IS DEACTIVATED")
+        else:
+            return HttpResponse("Your username or password is wrong <br> <a href="">click here to try again</a>")
+    else:
+        return render(request, 'registration/staff_login.html')
+
+
+def student_login(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_superuser:
+                login(request, user)
+                return HttpResponseRedirect(reverse('staff_login'))
+            elif user.is_staff:
+                login(request, user)
+                return HttpResponseRedirect(reverse('staff_login'))
+            elif user.is_active:
+                login(request, user)
                 return HttpResponseRedirect(reverse('profile'))  # student_panel
             else:
                 return HttpResponse("ACCOUNT IS DEACTIVATED")
         else:
             return HttpResponse("Your username or password is wrong <br> <a href="">click here to try again</a>")
     else:
-        return render(request, 'registration/login.html')
-
+        return render(request, 'registration/student_login.html')
 
 # @login_required
 def user_logout(request):
