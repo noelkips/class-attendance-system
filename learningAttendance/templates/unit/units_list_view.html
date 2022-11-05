@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% load static %}>
+{% load static %}
 <div class="row">
 <div class="col-12">
   {% if user %}
   <div class="card bg-light ms-4 me-4 mb-4">
     <div class="card-header">
      All Units
+
 
     </div>
     <div class="card-body">
@@ -17,10 +18,11 @@
             <thead>
               <tr>
                 <th scope="col">Unit</th>
-                <th scope="col" >Course</th>
+                <th scope="col">Course</th>
                 <th scope="col">On Offer</th>
                 <th scope="col">Semester</th>
-                  <th scope="col">Lecturer</th>
+                <th scope="col">Lectures</th>
+                 <th scope="col">Students</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -28,24 +30,32 @@
                 {% for unit in courses.units.all %}
              <tr>
                 <td>
-                    <h3>{{unit.unit_name}}</h3>
+                    <h2>{{unit.unit_name}}</h2>
                 </td>
-                <td>{{unit.course}}</td>
+                <td><h2>{{unit.course}}</h2></td>
                 <td>{{unit.is_offered}}</td>
                 <td>{{unit.semester}}</td>
-                  <td>{{unit.lecturer}}</td>
                 <td>
-                        <a class="btn btn-primary" href="{% url 'meru_learning:lectures_list' slug=unit.slug course=courses.slug school=courses.school%}">
-                         View Lectures
+                        <a href="{% url 'meru_learning:lectures_list' slug=unit.slug course=courses.slug school=courses.school%}">
+                            <h2>
+                                <span>Lectures</span>
+                            </h2>
                         </a>
-                     <a class="btn btn-primary" href="{% url 'meru_learning:unit_student_list' slug=unit.slug course=courses.slug school=courses.school%}">
-                          Registered Students
-                        </a>
-                     <a class="btn btn-primary float-right" href="{% url 'meru_learning:unit_student_registration'  slug=course.slug school=courses.school%}">
-            Register Student
-          </a>
                 </td>
-
+                <td>
+                        <a href="{% url 'meru_learning:unit_student_list' slug=unit.slug course=courses.slug school=courses.school%}">
+                            <h3>
+                                <span>Registered Students</span>
+                            </h3>
+                        </a>
+                </td>
+                <td>
+                    <a href="{% url 'meru_learning:unit_student_registration' slug=unit.slug course=courses.slug school=courses.school%}">
+                          <h3>
+                                <span>Register Student</span>
+                            </h3>
+                    </a>
+                </td>
 
              </tr>
              {% endfor %}

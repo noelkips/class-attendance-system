@@ -43,7 +43,7 @@ urlpatterns = [
     path('<str:school>/<str:course>/<slug:slug>/students',
          UnitRegisteredStudents.as_view(), name='unit_student_list'
          ),
-    path('<str:school>/<slug:slug>/students/new',
+    path('<str:school>/<str:course>/<slug:slug>/students/new',
          UnitRegistrationView.as_view(), name='unit_student_registration'
          ),
     path('<str:school>/<str:course>/<str:unit>/<slug:slug>/',

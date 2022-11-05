@@ -91,7 +91,7 @@ class StudentListView(DetailView):
 # Views fo Units
 # 1 list
 class UnitsListView(DetailView):
-    context_object_name = 'units'
+    context_object_name = 'courses'
     model = Course
     template_name = "unit/units_list_view.html"
 
