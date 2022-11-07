@@ -1,55 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="float-right-image">
- {% if school.image %}
-    <img class="" src="{{ school.image.url }}" alt="School image" height="350px" width="350px">
-    {% else %}
-    <h1>add image</h1>
-    {% endif %}
-</div>
-<div class="row">
-        <div class="col-md-8 d-flex mb-5 justify-content-center">
-            <div class="card card-std text-center" style="width: 36rem; height: auto">
-                <div class="card-body text-center">
-                    <h4 class="card-title" style="color:#ff5722;">{{school.name}}</h4>
-                    <p class="card-text">{{school.description}}</p>
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'meru_learning:courses_list' slug=school.slug %}" class="btn btn-primary" style="background-color:#00bcd4;">
-                         <h2>
-                            <span>View Courses</span>
-                        </h2>
-                    </a>
-                    {%else%}
-                    <p>Register or login to check or manage attendance</p>
-                    <a href="{% url 'login' %}" class="btn btn-std" style="background-color:#00bcd4;">Login</a>
-                    <a href="{% url 'signup' %}" class="btn btn-primary" style="background-color:#00bcd4;">Register</a>
-                    {%endif%}
-                </div>
+{% load static%}
+<div class="container-fluid">
+    <div style="padding: 30px;">
+        <p></p>
+    </div>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-md-5 image-wrapper">
+                {% if school.image %}
+                <img src="{{ school.image.url }}" alt="Course Iamge">
+                {%else%}
+                <img src="" alt="school Image">
+                {% endif%}
             </div>
-        </div><br>
-    </div><br>
-<div class="row">
-    <div class="col-md-8 d-flex mb-5 justify-content-center">
-            <div class="card card-std text-center" style="width: 36rem; height: auto">
-                <h4 class="card-title" style="color:#ff5722;">{{school.name}}</h4>
-                <div class="card-body text-center">
-                    {% if user.is_superuser %}
-                    <a href="{% url 'meru_learning:school_update' pk=school.pk %}" class="btn btn-primary" style="background-color:#00bcd4;">
-                        <h2>
-                            <span>Update</span>
-                        </h2>
-                    </a>
-                    <a href="{% url 'meru_learning:school_delete' pk=school.pk %}" class="btn btn-primary" style="background-color:#00bcd4;">
-                         <h2>
-                            <span>Delete</span>
-                        </h2>
-                    </a>
-                    {%else%}
-                    <p>You are not allowed to update or delete this school</p>
-                    {%endif%}
+            <div class="col-12 col-md">
+                <div class="text-wrapper">
+                    <h1 class="mbr-section-title mbr-fonts-style mb-3 display-3">
+                        <strong>{{school.name}}</strong></h1>
+                    <p class="mbr-text mbr-fonts-style display-7 text-white">
+                        {{school.description}}</p>
+                    <div class="mbr-section-btn mt-3"><a class="btn btn-black display-4" href="{% url 'meru_learning:school_update' pk=school.pk %}">Update</a>
+                        <a class="btn btn-black display-4" href="{% url 'meru_learning:courses_list' slug=school.slug %}">View Courses&nbsp;</a>
+                        <a class="btn btn-secondary display-4" href="{% url 'meru_learning:school_delete' pk=school.pk %}">Delete&nbsp;</a></div>
                 </div>
             </div>
         </div>
-</div>
+        <div style="padding: 30px;">
+            <p></p>
+        </div>
+    </div>
+
 {% endblock %}

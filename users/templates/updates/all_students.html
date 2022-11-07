@@ -5,45 +5,41 @@
 
 <div class="row">
 <div class="col-12">
-  <div class="card bg-light ms-4 me-4 mb-4">
-    <div class="card-header">
-      <i class=""> Registered students</i><br><hr>
-        <div class="bg-success header-links">
-            <a  class="alert-link " href="{% url 'user_new' %}">+ Add Student</a>
+  <div class="card bg-light ms-8 me-8 mb-8 display_2" style="padding: 10px;">
+    <div class="card-header display_2">
+      <i class=""> Registered Users</i><br><hr>
+        <div class=" header-links">
+            <a  class="btn btn-black " href="{% url 'user_new' %}">+ Add User</a>
         </div>
     </div>
     <div class="card-body">
-      <p class="card-text">
-        <div class="table-responsive">
-          <table class="table table-hover">
+      <p class="card-text display_2">
+        <div class="table-responsive ">
+          <table class="table table-hover ">
             <thead>
               <tr>
-                <th scope="col">Student Name</th>
-                <th scope="col">Reg Number</th>
-                <th scope="col">Course</th>
-                <th scope="col">year</th>
-                <th scope="col">semester</th>
-                <th scope="col">School</th>
-                <th scope="col" colspan="2">Actions</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Username</th>
+          
+                <th scope="col" colspan="3">Actions</th>
               </tr>
             </thead>
             <tbody>
                 {% for user in users %}
                  <tr>
-                    <td>{{user.first_name}} {{user.last_name}}</td>
+                    <td>{{user.first_name}} </td>
+                    <td>{{user.last_name}}</td>
                     <td>{{user.username}}</td>
-                    <td>{{user.course}}</td>
-                    <td>{{user.year}}</td>
-                    <td>{{user.semester}}</td>
-                    <td>{{user.school}}</td>
+                   
                      <td>
-                         <button class="btn btn-success">
+                         <button class="btn btn-black">
                             <a  class="text-white" href="{% url 'user_edit' slug=user.slug %}">Update</a>
-                        </button>
+                        </button></td><td>
                           <button class="btn btn-success">
                            <a class="text-white" href="{% url 'password_reset' %}">Reset password</a></h3>
-                        </button>
-                         <button class="btn btn-danger">
+                        </button></td><td>
+                         <button class="btn btn-secondary">
                             <a  class="text-white" href="{% url 'user_delete' slug=user.slug %}">Delete</a>
                         </button>
                      </td>

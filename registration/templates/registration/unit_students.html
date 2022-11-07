@@ -1,48 +1,58 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row">
-<div class="col-12">
-  <div class="card bg-light ms-4 me-4 mb-4">
-    <div class="card-header">
-     Registered students
-
-    </div>
-    <div class="card-body">
-      <p class="card-text">
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Student Name</th>
-                  <th scope="col">Registration Number</th>
-                <th scope="col">Unit</th>
-                   <th scope="col">Attendance</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for unit in units.registrations.all %}
-                 <tr>
-                    <td>{{unit.user.first_name}} {{unit.user.last_name}}</td>
-                      <td>{{unit.user}}</td>
-                    <td>{{unit.unit}}</td>
-                     <td>
-                         <button class="btn btn-indigo btn-rounded btn-md">
-                <a href="">
-                <h2>
-                    <span> Attendance</span>
-                </h2>
-            </a>
-            </button>
-                     </td>
-                 </tr>
-             {% endfor %}
-            </tbody>
-          </table>
+<div class="container-fluid">
+  <div style="padding: 30px;">
+      <p></p>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card bg-light ms-6 me-6 mb-6 display-2">
+        <div class="card-header">
+         Registered students
+    
         </div>
-      </p>
+        <div class="card-body">
+          <p class="card-text">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Student Name</th>
+                      <th scope="col">Registration Number</th>
+                    <th scope="col">Unit</th>
+                       <th scope="col">Attendance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for unit in units.registrations.all %}
+                     <tr>
+                        <td>{{unit.user.first_name}} {{unit.user.last_name}}</td>
+                          <td>{{unit.user}}</td>
+                        <td>{{unit.unit}}</td>
+                         <td>
+                             <button class="btn btn-indigo btn-rounded btn-md">
+                    <a href="">
+                    <h2>
+                        <span> Attendance</span>
+                    </h2>
+                </a>
+                </button>
+                         </td>
+                     </tr>
+                 {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </p>
+        </div>
     </div>
+    </div>
+    </div>
+      </div>
+      <div style="padding: 130px;">
+          <p></p>
+      </div>
 </div>
-</div>
-</div>
+
 {% endblock %}

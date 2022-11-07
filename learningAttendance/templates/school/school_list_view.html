@@ -1,50 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
- {% if user.is_superuser %}
-<div class="float-right">
-    <a href="{% url 'meru_learning:school_create'%}" class="btn btn-success" style="background-color:#00bcd4;">
-    <h2>
-        <span>+ New School</span>
-    </h2>
-</a>
-</div>
-{%else%}
-<p></p>
+{% load static %}
 
-{%endif%}
-<section id="best-features" class="text-center">
-              <h2 class="mb-5 mt-5 font-weight-bold" style="color:#ff5722;">Meru school of sciences and technology</h2>
-              <div class="row d-flex justify-content-center mb-4">
-                <div class="col-md-8">
-                  <p class="blue-text">Click on the school you like to see the attendance information below</p>
-                </div>
+  <div class="container">
+   <div style="padding: 40px;"><p></p></div>
+      <div class="mbr-section-head">
+        
+          <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-1">
+              <strong>Schools</strong></h4>
+              <h4 class="mbr-section-title  align-right mb-0 display-1">
+                <a href="{% url 'meru_learning:school_create'%}" class="btn btn-primary" style="background-color:#1d2425;">
+                 New School
+            </a>
+        </h4>
+          <h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-2 display-2">To check or manage Attendance ,<br> click on each school</h5>
+      </div>
+      <div class="row mt-4">{% for school in schools %}
+          <div class="item features-image сol-12 col-md-6 col-lg-4">
+              
+              <div class="item-wrapper">
+                  <div class="item-img">
+                    {% if school.image %}
+                      <img src="{{school.image.url}}" alt="School Pic" title="">
+                    {%endif%}
+                  </div>
+                  <div class="item-content">
+                      <h5 class="item-title mbr-fonts-style display-7"><strong>{{school.name}}</strong></h5>
+                  </div>
+                  <div class="mbr-section-btn item-footer mt-2">
+                    <a href="{% url 'meru_learning:courses_list' slug=school.slug %}" class="btn item-btn btn-black display-7" target="_blank">View Courses</a>
+                    <a href="{% url 'meru_learning:school_detail' pk=school.pk %}" class="btn item-btn btn-black display-7" target="_blank">See More > >
+                    </a>
+                  </div>
               </div>
-              <div class="row">
-                      {% for school in schools %}
-                      <div class="col-md-4 d-flex mb-5 justify-content-center">
-                        <div class="card card-std text-center" style="width: 36rem; height: auto">
-                            {% if school.image %}
-                            <img src="{{ school.image.url }}" alt="School image" height="auto" width="100%">
-                            {% else %}
-                               <p></p>
-                            {% endif %}
-                          <div class="card-body text-center">
-                            <h4 class="card-title" style="color:#ff5722;">{{school.name}}</h4>
-                            <p class="card-text">{{school.description|truncatechars:75}}</p>
-                            {% if user.is_authenticated %}
-                            <a href="{% url 'meru_learning:courses_list' slug=school.slug %}" class="btn btn-primary" style="background-color:#00bcd4;">View Courses</a>
-                              <a href="{% url 'meru_learning:school_detail' pk=school.pk %}" class="btn btn-danger" style="background-color:#00bcd4;">See More</a>
-                            {%else%}
-                            <p>Register or login to check or manage attendance</p>
-                            <a href="{% url 'login' %}" class="btn btn-std" style="background-color:#00bcd4;">Login</a>
-                            <a href="{% url 'signup' %}" class="btn btn-primary" style="background-color:#00bcd4;">Register</a>
-                            {%endif%}
-                          </div>
-                        </div>
-                      </div>
-                      {% endfor %}
-              </div>
+              
+          </div>
+          {% endfor%}
+      </div>
+  </div>
 </section>
+
 
 {% endblock %}

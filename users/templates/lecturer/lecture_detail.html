@@ -3,94 +3,92 @@
 {% block content %}
 
 
-<h1 class="mb-0 mt-5 font-weight-bold">
-    {{lecture.unit}}</h1>
-    <h2 class="text-center" style="color:#ff5722;">{{lecture.lecture_name}}</h2>
+<div class="container-fluid video4" id="video4-c">
+  <div class="title-wrapper mb-5">
+    <div style="padding: 20px;">
+      <p>
 
-<br>
-
-
-
-<section class="text-center">
-
-    <div class="row d-flex justify-content-center mb-3">
-      <blockquote class="blockquote mt-0">
-        <footer class="blockquote-footer bg-white">
-            Created on {{lecture.created_at}} by
-            <cite title="Source Title">{{lecture.created_by}}
-            </cite>
-        </footer>
-      </blockquote>
+      </p>
     </div>
-
-
-    <div class="row d-flex justify-content-center mb-3">
-         {% if lecture.video %}
-      <div id="player-overlay">
-            <video controls>
-                <source src="{{lecture.video.url}}"  type="video/mp4">
-              </video>
+      <h4 class="mbr-section-title mbr-fonts-style mb-0 display-2">
+          <strong>{{lecture.unit}}</strong></h4>
+  </div>
+    <div class="row d-flex  mb-3">
+      <div class="col-8 col-lg-7 video-block" >
+        {% if lecture.video %}
+        <div class="row d-flex  mb-4" style="width:600; height:200;">
+             <video controls   id="player-overlay">
+                 <source src="{{lecture.video.url}}"  type="video/mp4">
+               </video>
+              
+        
+       </div>
+      
+  
+       
+        {%else%}
+        <p class="mbr-description pt-2 mbr-fonts-style display-4">
+          Video For this Lecture Not Available</p>
+        {%endif%}  
+        
       </div>
-         {% else %}
-                      <p class="card-text">Video not available</p>
-                      {%endif%}
-    </div>
-
-    <!-- download cards -->
-    <div class="row d-flex justify-content-center mb-3 mt-3">
-      <!-- download presentations -->
-                <div class="col-md-4 mb-4 mt-4">
-                  <div class="card box-shadow-hover">
-                    <div class="card-body">
-                      <h5 class="card-title">Download Presentations</h5>
+      <div class="col-12 col-lg">
+          <div class="text-wrapper">
+            <div style="background-color: rgb(67, 174, 201); padding: 10px;">
+              <h5 class="mbr-section-subtitle mbr-fonts-style mb-3 display-5">
+                  <strong>{{lecture.lecture_name}}</strong></h5>
+              <p class="mbr-text mbr-fonts-style display-2">
+                  <h2>Lecturer:</h2> <em>{{lecture.created_by.first_name}} {{lecture.created_by.last_name}}</em></p>
+                  <p class="mbr-text mbr-fonts-style display-2">
+                    <h2> Date Added:</h2> <em>{{lecture.created_at}}</em></p>
+            </div><hr>
+              
+                    <div style=" padding: 10px; background-color: rgb(54, 174, 196); color: rgb(253, 253, 253); font-size: large;">
+                      <h2 class="card-title text-white"><strong>Download Power Point Presentation</strong></h2>
                       {% if lecture.ppt %}
-                      <p class="card-text">Download presentations from the lecture</p>
                       <a href="{{lecture.ppt.url}}" download>
-                      <button type="button" class="button-les"><span>Get Files</span></button>
+                      <button type="button" class="btn btn-black"><h2><span class="text-white">Get ppt</span></h2></button>
                       </a>
                       {% else %}
                       <p class="card-text" > No PPT available</p>
-                      {% endif %}
+                      {% endif %}</div><hr>
 
-                    </div>
-                  </div>
-                </div>
-      <!-- download notes -->
-                <div class="col-md-4 mb-4 mt-4">
-                  <div class="card box-shadow-hover">
-                    <div class="card-body">
-                      <h5 class="card-title">Download Notes</h5>
-                      {% if lecture.notes %}
-                      <p class="card-text">Download notes from the lecture</p>
-                      <a href="{{lecture.notes.url}}" download>
-                      <button type="button" class="button-les"><span>Get Files</span></button>
-                      </a>
-                      {% else %}
-                      <p class="card-text">Notes not available</p>
-                      {%endif%}
-
-                    </div>
-                  </div>
-                </div>
-
-      <!-- download video -->
-                <div class="col-md-4 mb-4 mt-4">
-                  <div class="card box-shadow-hover">
-                    <div class="card-body">
-                      <h5 class="card-title">Download Video</h5>
-                        {% if lecture.video %}
-                          <p class="card-text">Download Video from the lecture</p>
-                          <a href="{{lecture.video.url}}" download>
-                          <button type="button" class="button-les"><span>Get Files</span></button>
-                          </a>
+                      <div style="  padding: 10px; background-color: rgb(54, 174, 196); color: rgb(253, 253, 253); font-size: large;">
+                        <h2 class="card-title text-white"><strong>Download Notes</strong></h2>
+                        {% if lecture.notes %}
+                        <a href="{{lecture.notes.url}}" download>
+                        <button type="button" class="btn btn-black"><h2><span class="text-white">Get Notes</span></h2></button>
+                        </a>
                         {% else %}
-                      <p class="card-text">Video not available</p>
-                      {%endif%}
-                    </div>
-                  </div>
-                </div>
-    </div>
+                        <p class="card-text" > Notes Not available</p><hr>
+                        {% endif %}</div>
 
-</section>
+                        <div style="  padding: 10px; background-color: rgb(54, 174, 196); color: rgb(253, 253, 253); font-size: large;">
+                          <h2 class="card-title text-white"><strong>Download Video</strong></h2>
+                          {% if lecture.ppt %}
+                          <a href="{{lecture.video.url}}" download>
+                          <button type="button" class="btn btn-black"><h2><span class="text-white">Get Video</span></h2></button>
+                          </a>
+                          {% else %}
+                          <p class="card-text" >Video Not available</p>
+                          {% endif %}</div><hr>
+                          
+          </div>
+          <div class="row d-flex  mb-3">
+      
+            <a class="btn btn-secondary display-4" href="{% url 'meru_learning:lecture_delete' slug=lecture.unit.slug course=lecture.unit.course.slug school=lecture.unit.course.school.slug pk=lecture.pk %}">Delete&nbsp;</a>
+            <a class="btn btn-black display-4" href="{% url 'meru_learning:lecture_update' slug=lecture.unit.slug course=lecture.unit.course.slug school=lecture.unit.course.school.slug pk=lecture.pk %}">Update</a>
+            
+          
+     
+    </div>
+      </div>
+      <div style="padding: 280px;">
+        <p>
+
+        </p>
+      </div>
+  </div>
+
 
 {% endblock %}

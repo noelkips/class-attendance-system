@@ -1,77 +1,85 @@
 {% load static %}
-<html>
+<html  >
 <head>
-    <title>MERU</title>
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="{% static 'admin/images/logo.png' %}" type="image/x-icon">
+  <meta name="description" content="">
+  
+  
+  <title>Home</title>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'admin/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'admin/bootstrap/css/bootstrap-grid.min.css' %}">
+  <link rel="stylesheet" href="{% static 'admin/bootstrap/css/bootstrap-reboot.min.css' %}">
+  <link rel="stylesheet" href="{% static 'admin/animatecss/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'admin/dropdown/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'admin/socicon/css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'admin/theme/css/style.css' %}">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,700;1,400;1,700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,700;1,400;1,700&display=swap&display=swap"></noscript>
+  <link rel="preload" as="style" href="{% static 'admin/admin/css/mbr-additional.css' %}"><link rel="stylesheet" href="{% static 'admin/admin/css/mbr-additional.css' %}" type="text/css">
+  
+  
+  
+  
 </head>
-<style>
-    body {
-        background-color: rgb(236, 224, 152);
-
-    }
-</style>
 <body>
-<div class="grid-container">
-    <header class="header">
-        <div class="">
-           <a class="navbar-brand"><i class="fa-solid fa-graduation-cap fa-lg"></i>MUST CLASS ATTENDANCE</a>
-        </div>
-        <div class="header-links brand">
-            <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container-fluid">
 
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav me-auto">
-                    {% if user.is_superuser %}
+<section data-bs-version="5.1" class="menu menu1 cid-tmkmRi5lUx" once="menu" id="menu1-1">
+    
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'meru_learning:schools_list'%}"><i class=""></i>Home</a>
-                    </li>
-                     <li class="nav-item">
-                           <a class="nav-link" href="{% url 'users_list' %}"><i class="fa-solid fa-list"></i>All Students</a>
-                      </li>
-                    {% endif %}
-                     {%if user.is_staff%}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'lecturer_units'%}"><i class=""></i>All Units</a>
-
-                    </li>
-                    {%endif%}
-                    {%if user.is_authenticated%}
-                    <li class="nav-item">
-                        <a  class="nav-link" href="{% url 'logout'%}"><i class=""></i>Logout</a>
-                    </li>
-                    {%else%}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login'%}"><i class=""></i>Login</a>
-                    </li>
-                    {%endif%}
-                </ul>
-              </div>
+    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-brand">
+                
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="{% url 'meru_learning:schools_list'%}">MUST CLASS ATTENDANCE</a></span>
             </div>
-          </nav>
-
-
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-white display-5" href="{% url 'meru_learning:schools_list'%}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link link text-white display-5" href="{% url 'users_list'%}">Users</a></li>
+                    <li class="nav-item"><a class="nav-link link text-white display-5" href="{% url 'logout'%}">Logout</a>
+                    </li></ul>
+                
+                
+            </div>
         </div>
-        </header>
-            </header>
-    <main class="main">
+    </nav>
+</section>
+<section data-bs-version="5.1" class="features4 cid-tmkn3Rbx6V" id="features4-2">
+    
+    <div class="mbr-overlay"></div>
         {% block content %}
         {% endblock content %}
-    </main>
-    <footer class="footer">
-       <div class="text-center brand">
-           <span>
-               Copyright &copy; <script>document.write(new Date().getFullYear())</script> Jotra Programmers
-           </span>
-       </div>
-    </footer>
-</div>
-</body>
-</html>
+</section>
 
+
+<section data-bs-version="5.1" class="footer7 cid-tmkqr9cASq" once="footers" id="footer7-4">
+
+    
+
+    
+
+    <div class="container">
+        <div class="media-container-row align-center mbr-white">
+            <div class="col-12">
+                <p class="mbr-text mb-0 mbr-fonts-style display-7">
+                    Copyright © 2022 Jotra Programmers
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+  </body>
+ 
+</html>
 

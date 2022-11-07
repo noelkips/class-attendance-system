@@ -1,8 +1,11 @@
+from http.client import HTTPResponse
+from multiprocessing import context
+from tkinter import E
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import slugify
 from django.urls import reverse_lazy, reverse
-
-from .models import School, Unit, Course, Lecture
+from django.shortcuts import render, get_object_or_404
+from .models import School, Unit, Course, Lecture, CourseUnits
 from django.views.generic import (DetailView, CreateView, UpdateView, DeleteView)
 
 
@@ -96,6 +99,36 @@ class UnitsListView(DetailView):
     template_name = "unit/units_list_view.html"
 
 
+def unit_list_pdf(request, pk):
+    units_list =[]
+    course = get_object_or_404(Course, pk=pk)
+    units = Unit.objects.filter(course=course)
+    with open(f'units_pdf/{course.course_name}.csv', 'w+') as f:
+        for unit in units:
+            units_list.append(unit)
+            print(unit)
+        for unit_to_add in units_list:
+            unit_list = f.readlines()
+            unit_names = []
+            for line in unit_list:
+                entry = line.split(",")
+                unit_names.append(entry[0])
+            unit = unit_to_add
+            if unit not in unit_names:
+                f.writelines(f'\n{unit.unit_name}, {unit.course}, {unit.is_offered}, {unit.semester},{unit.lecturer.first_name} {unit.lecturer.last_name}')
+                load_files =CourseUnits.objects.create(
+                    course=course,
+                    unit_pdf=f,
+                )
+                load_files.save()
+    context= {
+        "pdf":f,
+    }
+    return render(request, "course/course_units_pdf.html", context)
+          
+   
+
+
 # 2 detail
 class UnitDetailView(DetailView):
     model = Unit
@@ -124,17 +157,42 @@ class UnitDeleteView(DeleteView):
     template_name = 'unit/unit_delete.html'
     success_url = reverse_lazy('meru_learning:schools_list')
 
-
+#views for lecture
+#list
 class LecturesListView(DetailView):
     context_object_name = 'units'
     model = Unit
-    template_name = "lectures_list_view.html"
+    template_name = "lecture/lectures_list_view.html"
 
-
+# 2 detail
 class LectureDetailView(DetailView):
     context_object_name = 'lecture'
     model = Lecture
-    template_name = "lecture_detail_view.html"
+    template_name = "lecture/lecture_detail_view.html"
+
+
+# 3 new unit
+class LectureCreateView(CreateView):
+    model = Lecture
+    template_name = 'lecture/lecture_create.html'
+    fields = ['lecture_name', 'created_by','position', 'unit', 'video', 'ppt', 'notes']
+
+
+# 4 update existing lecture
+class LectureUpdateView(UpdateView):
+    model = Lecture
+    template_name = 'lecture/lecture_update.html'
+    fields = ['lecture_name', 'created_by','position', 'unit', 'video', 'ppt', 'notes']
+
+
+# 5 Delete lecture
+class LectureDeleteView(DeleteView):
+    model = Lecture
+    template_name = 'lecture/lecture_delete.html'
+    success_url = reverse_lazy('meru_learning:schools_list')
+
+
+
 
 
 class AttendanceListView(DetailView):

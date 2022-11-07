@@ -17,6 +17,7 @@ urlpatterns = [
     # urls for course
     path('<slug:slug>/new/', views.CourseCreateView.as_view(), name='course_create'),
     path('<slug:slug>/', views.CoursesListView.as_view(), name='courses_list'),
+    
     path('<slug:slug>/<int:pk>/', views.CourseDetailView.as_view(), name="course_detail"),
     path('<slug:slug>/<int:pk>/edit/', views.CourseUpdateView.as_view(), name='course_update'),
     path('<slug:slug>/<int:pk>/delete/', views.CourseDeleteView.as_view(), name='course_delete'),
@@ -34,9 +35,19 @@ urlpatterns = [
     path('<str:school>/<slug:slug>/<int:pk>/delete/', views.UnitDeleteView.as_view(), name='unit_delete'),
 
 
+     #urls for lectures
     path('<str:school>/<str:course>/<slug:slug>/',
          views.LecturesListView.as_view(), name='lectures_list'
+    ),
+    path('<str:school>/<str:course>/<slug:slug>/new/', views.LectureCreateView.as_view(), name='lecture_create'),
+     path('<str:school>/<str:course>/<str:unit>/<slug:slug>/',
+         views.LectureDetailView.as_view(), name='lectures_detail'
          ),
+    path('<str:school>/<str:course>/<slug:slug>/<int:pk>/edit/', views.LectureUpdateView.as_view(), name='lecture_update'),
+    path('<str:school>/<str:course>/<slug:slug>/<int:pk>/delete/', views.LectureDeleteView.as_view(), name='lecture_delete'),
+    
+
+
     path('<str:school>/<str:course>/<str:unit>/<slug:slug>/attendance/',
          views.AttendanceListView.as_view(), name='attendance_list'
          ),
@@ -46,8 +57,6 @@ urlpatterns = [
     path('<str:school>/<str:course>/<slug:slug>/students/new',
          UnitRegistrationView.as_view(), name='unit_student_registration'
          ),
-    path('<str:school>/<str:course>/<str:unit>/<slug:slug>/',
-         views.LectureDetailView.as_view(), name='lectures_detail'
-         ),
+   
 
 ]

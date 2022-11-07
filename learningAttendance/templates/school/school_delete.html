@@ -1,16 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>
-   <h1>Delete School</h1><br>
-    <form action="" method="post">{% csrf_token %}
-        <div class="alert alert-danger text-center " role="alert">
-            <h1>Are you sure you want to delete this School ?</h1>
+{% load crispy_forms_tags %}
 
-        <hr>
-        <h2>
-            <input class="bg-danger" type="submit" value="Confirm" />
-        </h2>
-             </div>
-    </form>
-</div>
+
+
+
+
+<section data-bs-version="5.1" class="header14 cid-tmksMy0nsf mbr-fullscreen" id="form5-8">
+
+    <p style="padding: 30px;">
+
+    </p><br>
+    <div class="container"><br><br>
+        <div class="mbr-section-head">
+            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-3">
+                <strong>Delete school</strong></h3>
+            
+        </div>
+        <div class="row  mt-4">
+            <div class="col-lg-8 display-5 mx-auto mbr-form">
+                <form action="" method="POST" class="mbr-form form-with-styler" data-verified="">
+                        {% csrf_token %}
+                        <h1>Are you sure you want to delete this School ?</h1>    
+                        <h2 class="text-white">School : {{school.name}}</h2><br>             
+                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
+                            <input type="submit" class="btn btn-secondary  display-2"  value="Confirm"> 
+                        </div><br>
+                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><br><br>
+                            <a class="btn btn-black display-5" href="{% url 'meru_learning:schools_list' %}" >Cancel</a>
+                        </div>
+                        
+                       
+                </form>
+            </div>
+        </div>
+        <div style="padding: 60px;">
+
+        </div><br>
+    </div>
+</section>
+
+
 {% endblock content %}

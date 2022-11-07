@@ -2,9 +2,13 @@
 
 {% block content %}
 {% load static %}
-<div class="row">
+<div class="container-fluid">
+  <div style="padding: 30px;">
+      <p></p>
+  </div>
+ <div class="row">
 <div class="col-12">
-  <div class="card bg-light ms-4 me-4 mb-4">
+  <div class="card bg-light ms-8 me-8 mb-8 display-2">
     <div class="card-header">
      All Units
     </div>
@@ -30,7 +34,7 @@
                 <td>{{unit.course}}</td>
                 <td>{{unit.is_offered}}</td>
                 <td>{{unit.semester}}</td>
-                  <td>{{unit.lecturer}}</td>
+                  <td><h5>{{unit.lecturer.first_name}} {{unit.lecturer.last_name}}</h5></td>
 
 
              </tr>
@@ -44,5 +48,10 @@
 
 </div>
 </div>
+      <div style="padding: 130px;">
+          <p></p>
+      </div>
+</div>
+
 
 {% endblock %}

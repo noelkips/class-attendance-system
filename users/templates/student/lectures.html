@@ -38,32 +38,26 @@
 
 }
 </style>
-<div class="alert alert-dark text-center " role="alert">
-    <h1>Choose the Lecture to View Attendance </h1>
-</div>
-<div class="alert alert-dark text-center " role="alert">
-    <h1>Total Attendance {{total_attendance}} </h1>
+<div class="container-fluid">
+    <div style="padding: 40px;">
+        <p></p>
+    </div>
+    <ul class="row">
+        {% for lecture in units.lectures.all %}
+         <li class="col-auto " >
+                  <div class ="card  bg-white mb-3 sm-3" style="width: 339px;">
+                  <div class="card-body">
+                      <h2 class="category-name-cap  "> {{lecture.lecture_name}}</h2><hr>
+                      <h3 class="card-text btn ">{{lecture.unit}}</h3><hr>
+                       <h3 class="card-text btn ">Lecturer: {{lecture.created_by}}</h3><hr>
+                          <a href="{% url 'student_lecture_detail' slug=lecture.slug  unit=lecture.unit.slug%}" class="btn item-btn btn-secondary display-7" target="">See more >></a>
 
-</div>
+                  </div>
+              </div>
+          </li>
+      {% endfor %}
+  </ul>
+   
+  </div>
 
-<ul class="row">
-      {% for lecture in units.lectures.all %}
-       <li class="col-auto " >
-                <div class ="card  bg-white mb-3 sm-3" style="width: 339px;">
-                <div class="card-body">
-                    <h2 class="category-name-cap  "> {{lecture.lecture_name}}</h2><hr>
-                    <h3 class="card-text btn ">{{lecture.unit}}</h3><hr>
-                     <h3 class="card-text btn ">Lecturer: {{lecture.created_by}}</h3><hr>
-                     <button class="btn btn-indigo btn-rounded btn-md">
-                    <a href="{% url 'registration:attendance' slug=lecture.slug %}">
-                    <h2>
-                        <span>View Attendance</span>
-                    </h2>
-                    </a></button>
-
-                </div>
-            </div>
-        </li>
-    {% endfor %}
-</ul>
 {% endblock content %}

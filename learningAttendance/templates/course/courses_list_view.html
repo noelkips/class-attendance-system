@@ -1,51 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
- {% if user.is_superuser %}
-<div class="float-right">
-    <a href="{% url 'meru_learning:course_create' slug=schools.slug %}" class="btn btn-success" style="background-color:#00bcd4;">
-    <h2>
-        <span>+ New Course</span>
-    </h2>
-</a><hr>
-</div>
-{%else%}
-<p></p>
+{% load static %}
 
-{%endif%}
-{% if user.is_staff %}
-    <ul class="row">
-    {% for course in schools.courses.all %}
-   <li class="col-auto " >
-       <div class ="card  bg-white mb-3 sm-3" style="width: 339px;">
-           {% if course.image %}
-           <img src="{{ course.image.url }}" alt="Course image" height="auto" width="100%">
-           {% else %}
-           <p></p>
-           {% endif %}
-           <div class="card-body">
-               <h2 class="category-name-cap  ">{{course.course_name}}</h2><hr>
-               <a href="{% url 'meru_learning:course_detail' slug=schools.slug pk=course.pk %}" class="btn btn-secondary" style="background-color:#00bcd4;">See More</a>
-               </a>
-               <a class="btn btn-primary" href="{% url 'meru_learning:units_list' slug=course.slug school=schools.slug %}">
-                Units
-                </a>
-                <a class="btn btn-primary" href="{% url 'meru_learning:students' slug=course.slug school=schools.slug %}">
-                Students
-                </a>
-               <a href="{% url 'meru_learning:unit_create' slug=course.slug school=schools.slug %}" class="btn btn-green" style="background-color:#00bcd4;">
-                  + add Unit
-               </a>
-            </div>
-        </div>
-    </li>
 
-    {% endfor %}
-</ul>
-{% else %}
-<div class="alert alert-success text-center " role="alert">
-    <h1>{{user.first_name}} You will be redirected to your profile Page </h1><br>
-    <h2><a href="{% url 'profile'%}" class="alert-link">Take Me to profile</a></h2>
-</div>
-{% endif %}
+<section data-bs-version="5.1" class="features4 cid-tmkn3Rbx6V" id="features4-2">
+    
+  <div class="mbr-overlay"></div>
+  <div class="container">
+    <div class="">
+      <a href="{% url 'meru_learning:course_create' slug=schools.slug %}" class="btn btn-success" style="background-color:#00bcd4;">
+      <h2>
+          <span>+ New Course</span>
+      </h2>
+  </a>
+  </div>
+      <div class="mbr-section-head">
+          <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-1">
+              <strong>Courses </strong></h4>
+      </div>
+      <div class="row mt-4">{% for course in schools.courses.all %}
+          <div class="item features-image сol-12 col-md-6 col-lg-4">
+              
+              <div class="item-wrapper">
+                  <div class="item-img">
+                    {% if course.image %}
+                      <img src="{{course.image.url}}" alt="Course Pic" title="">
+                    {%endif%}
+                  </div>
+                  <div class="item-content">
+                      <h5 class="item-title mbr-fonts-style display-7"><strong>{{course.course_name}}</strong></h5>
+                      <p class="item-title mbr-fonts-style display-7"><strong>{{course.description|truncatechars:75}}</strong></p>
+                  </div>
+                  <div class="mbr-section-btn item-footer mt-2">
+                    <a href="{% url 'meru_learning:units_list' slug=course.slug school=schools.slug %}" class="btn item-btn btn-black display-7" target="">View Units</a>
+                     
+                    <a href="{% url 'meru_learning:students' slug=course.slug school=schools.slug %}" class="btn item-btn btn-black display-7" target="">Registered Students
+                    </a> 
+                    <a href="{% url 'meru_learning:course_detail' pk=course.pk slug=course.slug  %}" class="btn item-btn btn-secondary display-7" target="">See more >></a>
+                  </div>
+              </div>
+              
+          </div>
+          {% endfor%}
+      </div>
+  </div>
+</section>
+
 {% endblock %}

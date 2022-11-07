@@ -1,0 +1,73 @@
+{% extends 'lecturer_panel.html' %}
+
+{% block content %}
+<style>
+    .card-text{
+        color: rgb(255, 255, 255);
+        padding-left: 20px;
+    }
+    .card-text-btn{
+        font-size: 2.2rem;
+        padding: 0.5rem;
+        background-color: rgb(182, 211, 186);
+        box-shadow: 5px 10px 30px rgba(18, 156, 13, 0.2);
+        border-radius: 20px;
+        color: #ffffff;
+        cursor: pointer;
+        text-align: center;
+
+    }
+    .category-name-cap{
+        border-radius: 20px;
+        text-align: center;
+    }
+    .see-more-btn{
+        width: 190px;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: #07221d;
+        border-radius: 20px;
+        box-shadow: 15px 20px 40px rgba(172, 128, 9, 0.2);
+        font-size: 28px;
+        text-decoration: none;
+        margin-left: 40px;
+
+}
+</style>
+
+  <div class="container-fluid">
+    <div style="padding: 40px;">
+        <p></p>
+    </div>
+    <div class="alert alert-success text-center " role="alert">
+        <h1>Select the lecture to View Attendance</h1>
+    </div>
+    <div class="row mt-4"> {% for lecture in lectures %}
+        <div class="item features-image сol-12 col-md-6 col-lg-4">
+            
+            <div class="item-wrapper">
+               
+                <div class="item-content">
+                    <h5 class="item-title mbr-fonts-style display-3"><strong> {{lecture.lecture_name}}</strong></h5>
+                    <h5 class="item-title mbr-fonts-style display-7"><strong> Unit: {{lecture.unit}}</strong></h5>
+                    <p class="item-title mbr-fonts-style display-7"><strong>Lecturer: {{lecture.created_by}}</strong></p>
+                </div>
+                <div class="mbr-section-btn item-footer mt-2">
+                 
+                  <a href="{% url 'lecture_attendance_report' slug=lecture.slug  %}" class="btn item-btn btn-secondary display-7" target="">Select >></a>
+                </div>
+            </div>
+            
+        </div>
+        {% endfor%}
+    </div>
+   
+    <div style="padding: 30px;">
+        <p></p>
+    </div>
+  </div>
+
+{% endblock content %}

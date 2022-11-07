@@ -1,0 +1,59 @@
+{% extends 'lecturer_panel.html'%}
+
+{%block content%}
+<div class="container-fluid">
+  <div style="padding: 30px;">
+    <div class="row">
+      <div class="col-12">
+        <div class="card bg-light ms-6 me-6 mb-6 display-2">
+          <div class="card-header">
+           Student's Attendance Report
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              <div class="table-responsive">
+                <table class="table table-hover display-4">
+                  <thead class="diplay-3">
+                    <tr >
+                      <th scope="col"><h2><strong>Student Name</strong></h2></th>
+                      <th  scope="col"><h2><strong>Reg Number</strong></h2></th>
+                      <th scope="col"><h2><strong>Course</strong></h2></th>
+                      <th scope="col"><h2><strong>Year</strong></h2></th>
+                      <th scope="col"><h2><strong>Semester</strong></h2></th>
+                      <th  scope="col"><h2><strong>lecture</strong></h2></th>
+                      <th  scope="col"><h2><strong>Date attended</strong></h2></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for user in attendance_list %}
+                       <tr>
+                          <td>{{user.user.first_name}} {{user.user.last_name}}</td>
+                          <td>{{user.user.username}}</td>
+                          <td>{{user.user.course}}</td>
+                          <td>{{user.user.year}}</td>
+                          <td>{{user.user.semester}}</td>
+                          <td>{{user.lecture}}</td>
+                          <td>{{user.date}}</td>
+                       </tr>
+                   {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </p>
+          </div>
+      </div>
+      
+       
+      </div>
+      </div>
+      <div style="padding: 80px;">
+          <p>
+
+
+
+          </p>
+      </div>
+</div>
+
+
+{%endblock%}

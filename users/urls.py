@@ -34,6 +34,11 @@ urlpatterns = [
          ),
     path('lecturer/units/<slug:slug>/attendance',
          views.LecturesAttendanceView.as_view(), name='lecturer_attendance'
+         ),  
+     path('lecturer/units_attendance/', views.lecturer_units_report, name="lecturer_units_report"),
+     path('lecturer/<slug:slug>/units_attendance/', views.lecturer_lectures_report, name="lecturer_lectures_report"),
+     path('lecturer/units/<slug:slug>/attendance_report',
+         views.lecturer_student_attendance_report, name='lecture_attendance_report'
          ),
     path('lecturer/units/<str:unit>/<slug:slug>/',
          views.LectureDetailView.as_view(), name='lecture_detail'
@@ -47,5 +52,8 @@ urlpatterns = [
     path('students/<slug:slug>/', views.UserDetailView.as_view(), name="user_detail"),
     path('students/<slug:slug>/edit/', views.UserUpdateView.as_view(), name='user_edit'),
     path('students/<slug:slug>/delete/', views.UserDeleteView.as_view(), name='user_delete'),
+     path('students/units/<str:unit>/<slug:slug>/lectures/',
+         views.StudentLectureDetailView.as_view(), name='student_lecture_detail'
+         ),
 
 ]

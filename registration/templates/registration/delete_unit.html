@@ -1,14 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>
-   <h1>Delete Unit</h1><br>
-    <form action="" method="post">{% csrf_token %}
-        <div class="alert alert-danger text-center " role="alert">
-        <h2>Are you sure you want to delete this unit ?</h2>
-        <hr>
-        <h2>
-            <input class="bg-danger" type="submit" value="Confirm" />
-        </h2></div>
-    </form>
-</div>
+<div class="container-fluid">
+    <div style="padding: 30px;">
+        <p></p>
+    </div>
+    <div>
+        <h1>Delete Unit</h1><br>
+         <form action="" method="post">{% csrf_token %}
+             <div class="alert alert-danger text-center " role="alert">
+             <h2>Are you sure you want to delete this unit ?</h2>
+             <hr>
+             <h2>
+                 <input class="bg-danger" type="submit" value="Confirm" />
+             </h2></div>
+         </form>
+     </div>
+        <div style="padding: 130px;">
+            <p></p>
+        </div>
+  </div>
+  
+
 {% endblock content %}

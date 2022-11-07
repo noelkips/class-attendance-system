@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 from django.template.defaultfilters import slugify
 import os
@@ -68,6 +69,21 @@ class Course(models.Model):
     def get_absolute_url(self):
         return reverse('meru_learning:courses_list', args=[slugify(self.school.slug)])
 
+def course_unit_pdf(instance, filename):
+    upload_to = 'Images/'
+    ext = filename.split('.')[-1]
+    # get filename
+    if instance.course:
+        filename = 'course_pdf/{}/{}.{}'.format(instance.course, instance.course, ext)
+        if os.path.exists(filename):
+            new_name = str(instance.course) + str('1')
+            filename = 'course_pdf/{}/{}.{}'.format(instance.course, new_name, ext)
+    return os.path.join(upload_to, filename)
+
+class CourseUnits(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='courses')
+    unit_pdf = models.FileField(upload_to=course_unit_pdf, verbose_name='Unit PDF', blank=True)
+
 
 def save_unit_image(instance, filename):
     upload_to = 'Images/'
@@ -96,6 +112,13 @@ class Unit(models.Model):
         self.slug = slugify(self.unit_name)
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        kwargs = {
+            'slug':self.course.slug,
+            'school':self.course.school.slug,
+        }
+        return reverse('meru_learning:units_list', kwargs=kwargs)
+
 
 def save_lecture_files(instance, filename):
     upload_to = 'Images/'
@@ -111,19 +134,16 @@ def save_lecture_files(instance, filename):
 
 class Lecture(models.Model):
     lecture_name = models.CharField(max_length=100, unique=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Lecturer")
     created_at = models.DateTimeField(auto_now_add=True)
     unit = models.ForeignKey(Unit, on_delete=models.CASCADE, related_name='lectures')
-    school = models.ForeignKey(School, on_delete=models.CASCADE)
     position = models.PositiveSmallIntegerField(verbose_name='Chapter no.')
     slug = models.SlugField(null=True, blank=True)
     # position represents chaters...1 is chapter one and so on
     video = models.FileField(upload_to=save_lecture_files, verbose_name='video', blank=True)
     ppt = models.FileField(upload_to=save_lecture_files, verbose_name='presentation', blank=True, null=True)
     notes = models.FileField(upload_to=save_lecture_files, verbose_name='notes', blank=True, null=True)
-    #used by lecturer and admin only
-    attendance_marked = models.BooleanField(default=False)
-
+    
     class Meta:
         ordering = ['position']
 
@@ -136,6 +156,9 @@ class Lecture(models.Model):
 
     def get_absolute_url(self):
         kwargs = {
-            'slug': self.slug or slugify(self.lecture_name, allow_unicode=True),
+            "slug": self.slug,
+            'unit':self.unit.slug,
+            'course':self.unit.course.slug,
+            'school':self.unit.course.school.slug,
         }
-        return reverse('meru_learning:lectures_list', kwargs=kwargs)
+        return reverse('meru_learning:lectures_detail', kwargs=kwargs)

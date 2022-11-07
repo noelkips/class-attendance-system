@@ -37,26 +37,37 @@
 
 }
 </style>
-<div class="alert alert-dark text-center " role="alert">
-    <h1>Choose the Unit to take Attendance </h1>
-</div>
-<ul class="row">
-      {% for unit in units %}
 
-   <li class="col-auto " >
-            <div class ="card  bg-white mb-3 sm-3" style="width: 339px;">
-            <div class="card-body">
-                <h2 class="category-name-cap bg-dark text-white"> {{unit.unit_name}}</h2><hr>
-                <h3 class="card-text-btn ">Course</h3><h3 class="card-text ">{{unit.course}}</h3>
-                 <h3 class="card-text-btn ">On offer</h3><h3 class="card-text">{{unit.is_offered}}</h3>
-                <h3 class="card-text-btn ">semester</h3><h3 class="card-text">{{unit.semester}}</h3>
-                <a class="see-more-btn" href="{% url 'lecturer_attendance' slug=unit.slug %}">
-                    Select</a>
-
+<div class="container-fluid">
+    <div style="padding: 20px;">
+        <p></p>
+    </div>
+    <div class="alert alert-dark text-center " role="alert">
+        <h1>Choose the Unit to take Attendance </h1>
+    </div>
+    <ul class="row">
+          {% for unit in units %}
+    
+       <li class="col-auto " >
+                <div class ="card  bg-white mb-3 sm-3" style="width: 339px;">
+                <div class="card-body">
+                    <h2 class="display-2"> {{unit.unit_name}}</h2><hr>
+                    <h3 class="card-text-btn ">Course</h3><h3 class="card-text ">{{unit.course}}</h3>
+                     <h3 class="card-text-btn ">On offer</h3><h3 class="card-text">{{unit.is_offered}}</h3>
+                    <h3 class="card-text-btn ">semester</h3><h3 class="card-text">{{unit.semester}}</h3>
+                    <a class="see-more-btn" href="{% url 'lecturer_attendance' slug=unit.slug %}">
+                        Select</a>
+    
+                </div>
             </div>
-        </div>
-    </li>
+        </li>
+    
+        {% endfor %}
+    </ul>
+  
+    <div style="padding: 30px;">
+        <p></p>
+    </div>
+  </div>
 
-    {% endfor %}
-</ul>
 {% endblock %}

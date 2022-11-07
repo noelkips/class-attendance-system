@@ -46,12 +46,12 @@
    <li class="col-auto " >
             <div class ="card  bg-white mb-3 sm-3" style="width: 339px;">
                 <div class="card-body">
-                <h2 class="category-name-cap bg-dark text-white"> {{unit.unit.unit_name}}</h2><hr>
+                <h2 class="display-2"> {{unit.unit.unit_name}}</h2><hr>
                 <h3 class="card-text-btn ">Course</h3><h3 class="card-text ">{{unit.unit.course}}</h3>
                  <h3 class="card-text-btn ">On offer</h3><h3 class="card-text">{{unit.unit.is_offered}}</h3>
                 <h3 class="card-text-btn ">semester</h3><h3 class="card-text">{{unit.unit.semester}}</h3>
-                    <a class="see-more-btn bg-primary" href="{% url 'student_attendance_report' slug=unit.unit.slug %}">
-                        <h5 >View Attendance</h5></a>
+                    <a class="see-more-btn btn-secondary" href="{% url 'student_attendance_report' slug=unit.unit.slug %}">
+                        <h5 >View Attendance</h5></a><br>
                 <a class="see-more-btn" href="{% url 'student_lectures' slug=unit.unit.slug %}">
                     View Lectures</a><br>
 

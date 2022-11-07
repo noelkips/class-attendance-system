@@ -45,10 +45,7 @@ def available_units_for_registration(request, slug):
         registered_units.append(obj.unit)
     for unit in unit_list_info:
         if unit in registered_units:
-
-            return HttpResponse(f'There are currently no units for you to register <br> this is because you have '
-                                f'either reached the maximum limit or your profile is not updated<br>consider visiting'
-                                f' admin')
+            pass
         else:
             units_to_register.append(unit)
     context = {
@@ -59,35 +56,40 @@ def available_units_for_registration(request, slug):
                   context)
 
 
-def registration(request):
-    try:
-        units_to_register = []
+def registration(request, slug):
+        # units_to_register = []
         registered_units = []
-        unit_list = Unit.objects.filter(course=request.user.course)
+        # unit_list = Unit.objects.filter(course=request.user.course)
         registration_info = Registration.objects.filter(user=request.user)
-        for obj in registration_info:
-            registered_units.append(obj.unit)
-        for unit in unit_list:
-            if unit in registered_units:
-                pass
-            else:
-                units_to_register.append(unit)
-        for unit in units_to_register:
-            if unit.semester == request.user.semester and unit.is_offered == True:
-                if len(registered_units) > 10:
+        unit = get_object_or_404(Unit, slug=slug)
+        # for obj in registration_info:
+        #     registered_units.append(obj.unit)
+        # for unit in unit_list:
+        # if unit not in registered_units:
+        #         units_to_register.append(unit)
+        # for unit in units_to_register:
+        if unit.semester == request.user.semester:
+            if unit.is_offered == True:
+                if len(registration_info) > 10:
                     return HttpResponse("You have reached the maximum number of units")
-                else:
+                elif len(registration_info) <= 10:
                     register = Registration.objects.create(
                         unit=unit,
                         user=request.user,
-                        profile_pic=request.user.profile_pic,
                         year=unit.year,
                         semester=unit.semester,
                     )
                     register.save()
                     return HttpResponse(register)
-    except HttpResponse:
-        HttpResponse("You have already registered for this unit, <a>please go back and try again</>")
+                else:
+                    return  HttpResponse("You have reached the maximum number of units")
+            elif unit.is_offered ==False:
+                return  HttpResponse("This Unit is not on offer")
+        else:
+            return  HttpResponse("Your Semester doesn't marge the Unit semester <br> you can only register units for semester you are in")
+
+        
+  
 
 
 class RegistrationDeleteView(DeleteView):

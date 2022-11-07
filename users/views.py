@@ -77,7 +77,10 @@ def user_logout(request):
 
 
 def my_course_info(request):
+    courses_list = []
     courses = Course.objects.filter(course_name=request.user.course)
+    for my_course in courses:
+        courses_list.append(my_course)
     registered_units = Registration.objects.filter(user=request.user)
 
     if 'profile_pic' in request.POST:
@@ -89,7 +92,7 @@ def my_course_info(request):
         return redirect('profile')
 
     context = {
-        "courses": courses,
+        "courses": courses_list,
         "registered_units": registered_units
 
     }
@@ -111,6 +114,17 @@ def lecturer_profile(request):
 
     }
     return render(request, 'lecturer/lecturer_profile.html', context)
+
+
+def lecturer_student_attendance_report(request, slug):
+    lecture = get_object_or_404(Lecture, slug=slug)
+    attendance_list = Attendance.objects.filter(lecture=lecture)
+
+    context = {
+        "attendance_list": attendance_list,
+    }
+    return render(request, "lecturer/lecturer_student_attendance_report.html", context)
+
 
 
 def update_lecturer_pic(request):
@@ -142,6 +156,23 @@ def lecturer_units(request):
 
     }
     return render(request, "lecturer/lecturer_units.html", context)
+
+def lecturer_units_report(request):
+    unit = Unit.objects.filter(lecturer=request.user)
+    context = {
+        "units": unit,
+
+    }
+    return render(request, "lecturer/lecturer_units_report.html", context)
+
+def lecturer_lectures_report(request, slug):
+    unit = get_object_or_404(Unit, slug=slug)
+    lectures = Lecture.objects.filter(unit=unit)
+    context = {
+        "lectures": lectures,
+
+    }
+    return render(request, "lecturer/lecturer_lectures_report.html", context)
 
 
 def update_profile_pic(request):
@@ -199,6 +230,8 @@ class StudentLecturesList(DetailView):
 
 
 def student_attendance_report(request, slug):
+    total_attendance=0
+    percentage =0
     unit = get_object_or_404(Unit, slug=slug)
     all_lectures = Lecture.objects.filter(unit=unit)
     attendance_list = Attendance.objects.filter(user=request.user)
@@ -210,8 +243,11 @@ def student_attendance_report(request, slug):
     for attendance in attendance_list:
         lecture = attendance.lecture
         attended_lectures.append(lecture)
-    total_attendance = f'you have attended {len(attendance_list)} of {len(registered_lectures)} lectures'
-    percentage = (len(attendance_list) / len(registered_lectures)) * 100
+    if len(registered_lectures) == 0:
+        HttpResponse("Ther are currently no  lectures in this unit")
+    else:
+        total_attendance = f'you have attended {len(attendance_list)} of {len(registered_lectures)} lectures'
+        percentage = (len(attendance_list) / len(registered_lectures)) * 100
     if percentage >= 70:
         exam_qualification = 'you meet the minimum class attendance requirement to sit for exams'
     else:
@@ -231,3 +267,8 @@ def registered_units_view(request):
     registered_units = Registration.objects.filter(user=request.user)
     return render(request, 'student/units.html',
                   {"units": registered_units, })
+
+class StudentLectureDetailView(DetailView):
+    context_object_name = 'lecture'
+    model = Lecture
+    template_name = "student/lecture_detail.html"

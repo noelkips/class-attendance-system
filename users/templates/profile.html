@@ -1,6 +1,7 @@
 {% extends 'students_page.html'%}
 
 {%block content%}
+
 <style>
 
 
@@ -102,9 +103,9 @@
 <div class="col-8">
   <div class="card bg-light ms-4 me-4 mb-4">
     <div class="card-header">
-       Registered Units
         {% for course in courses %}
-            <a  class="text-right all-units btn bg-black text-white" href="{% url 'all_units' slug=course.slug%}">All units</a>
+        <a class="btn bg-success display-2" href="{% url 'registration:unit_registration' slug=course.slug %}">Register_unit</a>
+            <a  class="all-units btn bg-success display-2" href="{% url 'all_units' slug=course.slug%}"><h1>All_units</h1></a>
             {% endfor %}
 
     </div>

@@ -1,0 +1,87 @@
+{% extends 'students_page.html' %}
+
+{% block content %}
+
+
+<div class="container-fluid video4" id="video4-c">
+  <div class="title-wrapper mb-5">
+    <div style="padding: 20px;">
+      <p>
+
+      </p>
+    </div>
+      <h4 class="mbr-section-title mbr-fonts-style mb-0 display-2">
+          <strong>{{lecture.unit}}</strong></h4>
+  </div>
+    <div class="row d-flex  mb-3">
+      <div class="col-8 col-lg-7 video-block" >
+        {% if lecture.video %}
+        <div class="row d-flex  mb-4" style="width:300; height:200;">
+             <video controls   id="player-overlay">
+                 <source src="{{lecture.video.url}}"  type="video/mp4">
+               </video>
+              
+        
+       </div>
+      
+  
+       
+        {%else%}
+        <p class="mbr-description pt-2 mbr-fonts-style display-4">
+          Video For this Lecture Not Available</p>
+        {%endif%}  
+        
+      </div>
+      <div class="col-12 col-lg">
+          <div class="text-wrapper">
+            <div style="background-color: rgb(67, 174, 201); padding: 10px;">
+              <h5 class="mbr-section-subtitle mbr-fonts-style mb-3 display-5">
+                  <strong>{{lecture.lecture_name}}</strong></h5>
+              <p class="mbr-text mbr-fonts-style display-2">
+                  <h2>Lecturer:</h2> <em>{{lecture.created_by.first_name}} {{lecture.created_by.last_name}}</em></p>
+                  <p class="mbr-text mbr-fonts-style display-2">
+                    <h2> Date Added:</h2> <em>{{lecture.created_at}}</em></p>
+            </div><hr>
+              
+                    <div style=" padding: 10px; background-color: rgb(54, 174, 196); color: rgb(253, 253, 253); font-size: large;">
+                      <h2 class="card-title text-white"><strong>Download Power Point Presentation</strong></h2>
+                      {% if lecture.ppt %}
+                      <a href="{{lecture.ppt.url}}" download>
+                      <button type="button" class="btn btn-black"><h2><span class="text-white">Get ppt</span></h2></button>
+                      </a>
+                      {% else %}
+                      <p class="card-text" > No PPT available</p>
+                      {% endif %}</div><hr>
+
+                      <div style="  padding: 10px; background-color: rgb(54, 174, 196); color: rgb(253, 253, 253); font-size: large;">
+                        <h2 class="card-title text-white"><strong>Download Notes</strong></h2>
+                        {% if lecture.notes %}
+                        <a href="{{lecture.notes.url}}" download>
+                        <button type="button" class="btn btn-black"><h2><span class="text-white">Get Notes</span></h2></button>
+                        </a>
+                        {% else %}
+                        <p class="card-text" > Notes Not available</p><hr>
+                        {% endif %}</div>
+
+                        <div style="  padding: 10px; background-color: rgb(54, 174, 196); color: rgb(253, 253, 253); font-size: large;">
+                          <h2 class="card-title text-white"><strong>Download Video</strong></h2>
+                          {% if lecture.ppt %}
+                          <a href="{{lecture.video.url}}" download>
+                          <button type="button" class="btn btn-black"><h2><span class="text-white">Get Video</span></h2></button>
+                          </a>
+                          {% else %}
+                          <p class="card-text" >Video Not available</p>
+                          {% endif %}</div><hr>
+                          
+          </div>
+         
+      </div>
+      <div style="padding: 180px;">
+        <p>
+
+        </p>
+      </div>
+  </div>
+
+
+{% endblock %}
